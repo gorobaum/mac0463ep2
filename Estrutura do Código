@@ -1,0 +1,25 @@
+Manual do Usuário
+
+RssFeed
+	O app puxa uma lista com todos os seminários de todas as categorias. O usuário pode clicar em qualquer item da lista para ter uma descrição sobre ele e cadastrar o seminário em seus calendário, com duração de 2 horas a partir do horário determinado pelo feed do seminário.
+
+MapaUsp 
+	O mapa simplesmente mostra todos os locais gerados pelo serviço acessado e permite a busca pelo nome de qualquer um deles. Ao clicar no marcador de qualquer um, informações sobre o endereço e telefone aparecem.
+
+	O mapa começa focado na cidade universitária, e ao pesquisar qualquer marcador válido o mapa é levado até lá.
+
+Estrutura do Código
+
+Todos os apps contam com uma interface para comunicação com o banco de dados SQLite nativo do device.
+Essa interface está codificada nas classes DBAdapter de cada um dos apps. Essa classe foi modificada para melhor se adaptar a cada app.
+
+Eles também contam com uma classe que cuida das requisições para os serviços e a construção dos objetos necessários para abstrair as informações desses serviços. Essas classes são as RequestX. Elas são implementações da AsyncTask do Android, criando o paralelismo requerido para comunicação com a internet de um app.
+
+As classes também verificam o estado da conexão com a internet antes de requisitarem informações mais novas. Ao requisitar informações, todo o conteúdo atual do banco é sobrescrito pelo novo.
+
+O app RssFeed conta com uma ListView para mostrar os Feeds na tela, e ela é alimentada diretamente pelo banco de dados usando a classe Cursor do Android.
+
+O app MapaUsp cria um novo Marker com informações extras usando a interface do GoogleMaps. É possível pesquisar por um local pelo nome dele. Ele também usa o Google Play Service lib para ter acesso as classes necessárias para utilizar o GoogleMap.
+
+Conclusões
+	O desenvolvimento dos aplicativos em Android foi bem mais proveitoso que o desenvolvimento usando o PhoneGap, pelo simples fato do maior controle sobre toda a aplicação que o desenvolvimente numa plataforma bem menos abstrada. 
